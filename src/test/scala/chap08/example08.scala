@@ -2,6 +2,8 @@ package chap08
 
 import org.scalatest.FunSuite
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
  * Created by kwonyoungjoo on 14. 9. 17..
  */
@@ -14,12 +16,11 @@ class example08 extends FunSuite{
 
   class SimpleItem(val price:Double, val description:String) extends Item
 
-  class Bundle {
-    private var items = Array[Item]()
+  class Bundle extends Item{
+    private val items = ArrayBuffer[Item]()
 
     def addItem(item:Item){
-      this.items :+ item
-      println ( items.length)
+      this.items += item
     }
 
     def price = {
@@ -30,10 +31,8 @@ class example08 extends FunSuite{
     }
 
     def description = {
-       var bundleDescription:String = ""
-       for(item <- this.items) bundleDescription += item.description
+      (for(item <- this.items) yield item.description).mkString("[", "-", "]")
     }
-
   }
 
   test("extends test"){
@@ -47,7 +46,7 @@ class example08 extends FunSuite{
     bundle.addItem(thirdItem)
 
     assertResult(600.0)(bundle.price)
-    println( bundle.description)
+    assertResult("[first Item-second Item-third Item]")( bundle.description)
   }
 
 }

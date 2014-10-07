@@ -5,7 +5,6 @@ import org.scalatest.FunSuite
 /**
  * Created by kwonyoungjoo on 14. 9. 3..
  */
-
 class packageTest extends FunSuite{
 
 
