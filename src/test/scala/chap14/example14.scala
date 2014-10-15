@@ -11,14 +11,13 @@ class example14 extends FunSuite{
   /*
   연습 문제 2
   */
-  def swap(t:Tuple2[Int, Int]): Tuple2[Int, Int] ={
+  def swap(t:(Int, Int)): (Int, Int) ={
     t match {
       case (x, y) => (y, x)
-      case _ => (0, 0)
     }
   }
 
-  test("swap int array"){
+  test("swap int tuple"){
     val t = (1,9)
     val swap_t = (9, 1)
 
@@ -31,8 +30,8 @@ class example14 extends FunSuite{
   abstract class Item
 
   case class Product(desc:String, price:Double) extends Item
-  case class Bundle(desc:String, items:List[Product]) extends Item
-  case class Multiple(count:Int, items:Product) extends Item
+  case class Bundle(desc:String, items:List[Item]) extends Item
+  case class Multiple(count:Int, items:Item) extends Item
 
   def price(item:Item) :Double ={
     var sum = 0.0
