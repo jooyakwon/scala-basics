@@ -27,7 +27,7 @@ class example14 extends FunSuite{
   /*
   연습 문제 4
   */
-  abstract class Item
+  sealed abstract class Item
 
   case class Product(desc:String, price:Double) extends Item
   case class Bundle(desc:String, items:List[Item]) extends Item
@@ -53,4 +53,19 @@ class example14 extends FunSuite{
     assertResult(1000.0)(price(multiple))
   }
 
+   /*
+    연습문제 5 풀이
+   */
+
+  def leafSum(list: List[Any]): Int = list match {
+    case Nil => 0
+    case (head:Int) :: tail => head + leafSum(tail)
+    case (head:List[Any]) :: tail  => leafSum(head) + leafSum(tail)
+    case _ => 0  // catch 하지 않으면 컴파일 에러 발생 ???
+  }
+
+  test("leafSum (exercise 14-5)") {
+    val input = List(List(3, 8), 2, List(5)) // ((3 8) 2 (5))
+    assert(leafSum(input) === 18)
+  }
 }
